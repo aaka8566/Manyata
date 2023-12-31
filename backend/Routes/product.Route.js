@@ -40,9 +40,9 @@ req.query.discount?queryfetch.discount={$gte:Number(req.query.discount)}:null;
 //discount
 
 console.log(queryfetch,typeof(req.query.price));
-    const products=await productModel.find(queryfetch).skip((Number(page)-1)*4).limit(4);
-    console.log(products);
-    res.status(200).json("products");
+    const products=await productModel.find(queryfetch).skip((Number(page)-1)*12).limit(12);
+    //console.log(products);
+    res.status(200).json(products);
 
 });
 productRouter.post("/addprod",async(req,res)=>{
