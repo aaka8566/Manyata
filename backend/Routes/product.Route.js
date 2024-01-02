@@ -10,16 +10,59 @@ productRouter.get("/getproddummy",async(req,res)=>{
 productRouter.get("/getprod",async(req,res)=>{
     let queryfetch={};let page=1;
     req.query.page?page=Number(req.query.page):null;
-    req.query.gender?queryfetch.gender=req.query.gender:null;
-    req.query.itemType?queryfetch.itemType=req.query.itemType:null;
-    req.query.brand?queryfetch.brand=req.query.brand:null;
+    // req.query.gender?queryfetch.gender=req.query.gender:null;
+    // req.query.itemType?queryfetch.itemType=req.query.itemType:null;
+    // req.query.brand?queryfetch.brand=req.query.brand:null;
 
-//rating
-if(req.query.rating){
-    if(typeof(req.query.rating)==="string"){
-        req.query.rating?queryfetch.rating={$gte:Number(req.query.rating)}:null;
+
+//itemType
+if(req.query.itemType){
+    // if(typeof(req.query.itemType)==="string"){
+    //     req.query.rating?queryfetch.rating={$gte:Number(req.query.rating)}:null;
+    // }
+    // else
+     if(typeof(req.query.itemType)==="object"){
+        req.query.itemType?queryfetch.itemType=req.query.itemType:null;
     }
-    else if(typeof(req.query.rating)==="object"){
+}
+//itemType
+
+
+
+//gender
+if(req.query.gender){
+    // if(typeof(req.query.gender)==="string"){
+    //     req.query.rating?queryfetch.rating={$gte:Number(req.query.rating)}:null;
+    // }
+    // else
+     if(typeof(req.query.gender)==="object"){
+        req.query.gender?queryfetch.gender=req.query.gender:null;
+    }
+}
+//gender
+
+
+
+
+
+//brand
+if(req.query.brand){
+    // if(typeof(req.query.brand)==="string"){
+    //     req.query.rating?queryfetch.rating={$gte:Number(req.query.rating)}:null;
+    // }
+    // else
+     if(typeof(req.query.brand)==="object"){
+        req.query.brand?queryfetch.brand=req.query.brand:null;
+    }
+}
+//brand
+    //rating
+if(req.query.rating){
+    // if(typeof(req.query.rating)==="string"){
+    //     req.query.rating?queryfetch.rating={$gte:Number(req.query.rating)}:null;
+    // }
+    // else
+    if(typeof(req.query.rating)==="object"){
         req.query.rating.sort();
         req.query.rating?queryfetch.rating={$gte:Number(req.query.rating[0])}:null;
     }
@@ -39,7 +82,7 @@ if(req.query.originalPrice&&typeof(req.query.originalPrice)==="object"){
 req.query.discount?queryfetch.discount={$gte:Number(req.query.discount)}:null;
 //discount
 
-console.log(queryfetch,typeof(req.query.price));
+console.log(req.query,typeof(req.query.brand));
     const products=await productModel.find(queryfetch).skip((Number(page)-1)*12).limit(12);
     //console.log(products);
     res.status(200).json(products);
