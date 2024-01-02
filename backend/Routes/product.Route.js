@@ -10,9 +10,9 @@ productRouter.get("/getproddummy",async(req,res)=>{
 productRouter.get("/getprod",async(req,res)=>{
     let queryfetch={};let page=1;
     req.query.page?page=Number(req.query.page):null;
-    req.query.gender?queryfetch.gender=req.query.gender:null;
-    req.query.itemType?queryfetch.itemType=req.query.itemType:null;
-    req.query.brand?queryfetch.brand=req.query.brand:null;
+    // req.query.gender?queryfetch.gender=req.query.gender:null;
+    // req.query.itemType?queryfetch.itemType=req.query.itemType:null;
+    // req.query.brand?queryfetch.brand=req.query.brand:null;
 
 
 //itemType
