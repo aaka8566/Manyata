@@ -28,7 +28,6 @@ if(req.query.itemType){
 //itemType
 
 
-
 //gender
 if(req.query.gender){
     // if(typeof(req.query.gender)==="string"){
@@ -42,9 +41,6 @@ if(req.query.gender){
 //gender
 
 
-
-
-
 //brand
 if(req.query.brand){
     // if(typeof(req.query.brand)==="string"){
@@ -56,7 +52,9 @@ if(req.query.brand){
     }
 }
 //brand
-    //rating
+
+
+//rating
 if(req.query.rating){
     // if(typeof(req.query.rating)==="string"){
     //     req.query.rating?queryfetch.rating={$gte:Number(req.query.rating)}:null;
@@ -83,7 +81,7 @@ req.query.discount?queryfetch.discount={$gte:Number(req.query.discount)}:null;
 //discount
 
 console.log(req.query,typeof(req.query.brand));
-    const products=await productModel.find(queryfetch).skip((Number(page)-1)*12).limit(12);
+    const products=await productModel.find(queryfetch).skip((Number(page)-1)*24).limit(24);
     //console.log(products);
     res.status(200).json(products);
 
