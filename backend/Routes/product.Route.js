@@ -86,6 +86,19 @@ console.log(req.query,typeof(req.query.brand));
     res.status(200).json(products);
 
 });
+
+productRouter.get("/getprod/:id",async(req,res)=>{
+const prodid=req.params.id;
+console.log(prodid);
+    try{
+        const product=await productModel.findById({"_id":prodid});
+        console.log(product);
+        res.status(200).json(product);
+    }
+    catch(err){
+        res.status(500).json("error in getting product");
+    }
+});
 productRouter.post("/addprod",async(req,res)=>{
     try{
         const products=await productModel(req.body);
