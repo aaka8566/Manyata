@@ -10,9 +10,18 @@ productRouter.get("/getproddummy",async(req,res)=>{
 productRouter.get("/getprod",async(req,res)=>{
     let queryfetch={};let page=1;
     req.query.page?page=Number(req.query.page):null;
-    // req.query.gender?queryfetch.gender=req.query.gender:null;
-    // req.query.itemType?queryfetch.itemType=req.query.itemType:null;
-    // req.query.brand?queryfetch.brand=req.query.brand:null;
+
+// search
+if(req.query.q&&!req.query.searchtype){
+    res.status(200).json("please provide searchtype");
+}
+else if(!req.query.q&&req.query.searchtype){
+    res.status(200).json("please provide searchkeywords");
+}
+else if(req.query.q&&req.query.searchtype){
+queryfetch[req.query.searchtype]=req.query.q;
+}
+// search
 
 
 //itemType

@@ -3,7 +3,9 @@ const userSchema=mongoose.Schema({
     name:String,
     username:String,
     password:String,
-    email:String
+    email:String,
+    wishlist:Array,
+    cart:Array,
 });
 const userModel=mongoose.model("usersdata",userSchema);
 module.exports={userModel};
