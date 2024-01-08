@@ -12,17 +12,7 @@ productRouter.get("/getprod",async(req,res)=>{
     let queryfetch={};let page=1;
     req.query.page?page=Number(req.query.page):null;
 
-// search
-if(req.query.q&&!req.query.searchtype){
-    res.status(200).json("please provide searchtype");
-}
-else if(!req.query.q&&req.query.searchtype){
-    res.status(200).json("please provide searchkeywords");
-}
-else if(req.query.q&&req.query.searchtype){
-queryfetch[req.query.searchtype]=req.query.q;
-}
-// search
+
 
 
 //itemType
@@ -174,5 +164,15 @@ productRouter.get("/delete",async(req,res)=>{
     }
 });
 
-
+// // search
+// if(req.query.q&&!req.query.searchtype){
+//     res.status(200).json("please provide searchtype");
+// }
+// else if(!req.query.q&&req.query.searchtype){
+//     res.status(200).json("please provide searchkeywords");
+// }
+// else if(req.query.q&&req.query.searchtype){
+// queryfetch[req.query.searchtype]=req.query.q;
+// }
+// // search
 module.exports={productRouter};

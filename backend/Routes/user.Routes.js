@@ -5,7 +5,6 @@ const {auth}=require("../middlewares/auth");
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
 
-
 userRouter.post("/register",auth,(req,res)=>{
     try{
        
