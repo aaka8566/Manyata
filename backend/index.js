@@ -4,8 +4,9 @@ const {connection}=require("./db");
 const cors=require("cors");
 const {userRouter}=require("./Routes/user.Routes");
 const {productRouter}=require("./Routes/product.Route.js");
-const {aith}=require("./middlewares/auth.js");
+const {auth}=require("./middlewares/auth.js");
 const {log}=require("./middlewares/log.js");
+// const {wishlistRouter}=require("./Routes/wishlist.Route");
 require("dotenv").config();
 
 

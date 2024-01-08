@@ -12,7 +12,7 @@ discount:Number,
 itemType:String,
 id:Number,
 gender:String,
-title:String,
+title:String
 });
 const productModel=mongoose.model("products",productSchema);
 module.exports={productModel};
