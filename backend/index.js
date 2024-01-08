@@ -5,7 +5,7 @@ const cors=require("cors");
 const {userRouter}=require("./Routes/user.Routes");
 const {productRouter}=require("./Routes/product.Route.js");
 // const {auth}=require("./middlewares/auth.js");
-const {log}=require("./middlewares/log.js");
+
  const {wishlistRouter}=require("./Routes/wishlist.Route");
 require("dotenv").config();
 
@@ -15,7 +15,6 @@ app.use(express.json());
 
 app.use("/users",userRouter);
 app.use("/products",productRouter);
-app.use(log);
 app.use("/wishlist",wishlistRouter);
 app.get("/",(req,res)=>{
     res.send("hello");

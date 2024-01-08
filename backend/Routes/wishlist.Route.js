@@ -2,9 +2,9 @@ const express=require("express");
 const { productModel } =require("../modules/product.Module");
 const {userModel}=require("../modules/user.Module");
 const wishlistRouter=express.Router();
+const {log}=require("../middlewares/log");
 
-
-
+wishlistRouter.use('/get',log);
 wishlistRouter.get("/get",async(req,res)=>{
     try {
         const userswishlist=await userModel.findOne({_id:req.body.authorid}).populate('products').exec();
