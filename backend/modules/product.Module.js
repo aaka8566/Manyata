@@ -1,4 +1,5 @@
 const mongoose=require("mongoose");
+const {Schema}=mongoose;
 const productSchema=mongoose.Schema({
 rating:Number,
 rating_Count:String,

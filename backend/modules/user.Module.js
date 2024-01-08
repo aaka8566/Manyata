@@ -1,4 +1,5 @@
 const mongoose=require("mongoose");
+const {Schema}=mongoose;
 const userSchema=mongoose.Schema({
     name:String,
     username:String,
