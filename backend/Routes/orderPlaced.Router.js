@@ -1,38 +1,38 @@
 const express=require("express");
 const { productModel } =require("../modules/product.Module");
 const {userModel}=require("../modules/user.Module");
-const cartRouter=express.Router();
+const ordersPlacedRouter=express.Router();
 const {log}=require("../middlewares/log");
 
 
-cartRouter.get("/get/:id",async(req,res)=>{
+ordersPlacedRouter.get("/get/:id",async(req,res)=>{
     try {
-        const userswishlist=await userModel.findOne({_id:req.params.id}).populate("cart").exec();
+        const userswishlist=await userModel.findOne({_id:req.params.id}).populate("ordersPlaced").exec();
         res.status(200).send(userswishlist);
     } catch (error) {
         console.log(error);
     }
 });
 
-cartRouter.post("/post",async(req,res)=>{
+ordersPlacedRouter.post("/post",async(req,res)=>{
     try {
         const usertoadd=await userModel.findOne({_id:req.body.authorid});
         usertoadd.wishlist.push(req.body.productid);
         await usertoadd.save();
-        res.status(200).send("added to cart successfully");
+        res.status(200).send("added to ordersPlaced successfully");
     } catch (error) {
-        console.log("not added to cart successfully");
+        console.log("not added to ordersPlaced successfully");
     }
 });
-cartRouter.delete("/delete",async(req,res)=>{
+ordersPlacedRouter.delete("/delete",async(req,res)=>{
     try {
         const usertoadd=await userModel.findOne({_id:req.query.authorid});
         console.log(req.query,usertoadd)
         usertoadd.wishlist.pull(req.query.productid);
         await usertoadd.save();
-        res.status(200).send("deleted to cart successfully");
+        res.status(200).send("deleted to ordersPlaced successfully");
     } catch (error) {
-        console.log("not deleted to cart successfully");
+        console.log("not deleted to ordersPlaced successfully");
     }
 });
-module.exports={cartRouter};
+module.exports={ordersPlacedRouter};
