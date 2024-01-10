@@ -4,33 +4,35 @@ const {userModel}=require("../modules/user.Module");
 const wishlistRouter=express.Router();
 const {log}=require("../middlewares/log");
 
-wishlistRouter.use('/get',log);
-wishlistRouter.get("/get",async(req,res)=>{
+
+wishlistRouter.get("/get/:id",async(req,res)=>{
     try {
-        const userswishlist=await userModel.findOne({_id:req.body.authorid}).populate('products').exec();
-        res.status(200).send(userswishlist.cart);
+        const userswishlist=await userModel.findOne({_id:req.params.id}).populate("wishlist").exec();
+        res.status(200).send(userswishlist);
     } catch (error) {
         console.log(error);
     }
 });
-wishlistRouter.get("/post",async(req,res)=>{
+
+wishlistRouter.post("/post",async(req,res)=>{
     try {
         const usertoadd=await userModel.findOne({_id:req.body.authorid});
         usertoadd.wishlist.push(req.body.productid);
         await usertoadd.save();
-        res.status(200).send("added to cart successfully");
+        res.status(200).send("added to wishlist successfully");
     } catch (error) {
-        console.log("not added to cart successfully");
+        console.log("not added to wishlist successfully");
     }
 });
-wishlistRouter.get("/delete",async(req,res)=>{
+wishlistRouter.delete("/delete",async(req,res)=>{
     try {
-        const usertoadd=await userModel.findOne({_id:req.body.authorid});
-        usertoadd.wishlist.pull(req.body.productid);
+        const usertoadd=await userModel.findOne({_id:req.query.authorid});
+        console.log(req.query,usertoadd)
+        usertoadd.wishlist.pull(req.query.productid);
         await usertoadd.save();
-        res.status(200).send("deleted to cart successfully");
+        res.status(200).send("deleted to wishlist successfully");
     } catch (error) {
-        console.log("not deleted to cart successfully");
+        console.log("not deleted to wishlist successfully");
     }
 });
 module.exports={wishlistRouter};

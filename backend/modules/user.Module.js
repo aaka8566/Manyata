@@ -7,6 +7,7 @@ const userSchema=mongoose.Schema({
     email:String,
     wishlist:[{type:Schema.Types.ObjectId,ref:"products"}],
     cart:[{type:Schema.Types.ObjectId,ref:"products"}],
+    ordersplaced:[{type:Schema.Types.ObjectId,ref:"products"}]
 });
 
 const userModel=mongoose.model("usersdata",userSchema);

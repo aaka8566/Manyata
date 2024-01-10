@@ -11,7 +11,17 @@ productRouter.get("/getproddummy",async(req,res)=>{
 productRouter.get("/getprod",async(req,res)=>{
     let queryfetch={};let page=1;
     req.query.page?page=Number(req.query.page):null;
-
+// search
+if(req.query.q&&!req.query.searchtype){
+    res.status(200).json("please provide searchtype");
+}
+else if(!req.query.q&&req.query.searchtype){
+    res.status(200).json("please provide searchkeywords");
+}
+else if(req.query.q&&req.query.searchtype){
+queryfetch[req.query.searchtype]=req.query.q;
+}
+// search
 
 
 
@@ -68,10 +78,10 @@ if(req.query.rating){
 //rating
 
 //price
-if(req.query.originalPrice&&typeof(req.query.originalPrice)==="object"){
-    if(typeof(req.query.originalPrice)==="object"){
-        req.query.originalPrice.sort();
-        req.query.originalPrice?queryfetch.originalPrice={$gte:Number(req.query.originalPrice[0]),$lte:Number(req.query.originalPrice[req.query.originalPrice.length-1])}:null;
+if(req.query.discountedPrice&&typeof(req.query.discountedPrice)==="object"){
+    if(typeof(req.query.discountedPrice)==="object"){
+        req.query.discountedPrice.sort();
+        req.query.discountedPrice?queryfetch.discountedPrice={$gte:Number(req.query.discountedPrice[0]),$lte:Number(req.query.discountedPrice[req.query.discountedPrice.length-1])}:null;
     }
 }
 //price
@@ -80,7 +90,7 @@ if(req.query.originalPrice&&typeof(req.query.originalPrice)==="object"){
 req.query.discount?queryfetch.discount={$gte:Number(req.query.discount)}:null;
 //discount
 
-console.log(req.query,typeof(req.query.brand));
+console.log(queryfetch);
     const products=await productModel.find(queryfetch).skip((Number(page)-1)*24).limit(24);
     //console.log(products);
     res.status(200).json(products);
@@ -164,15 +174,5 @@ productRouter.get("/delete",async(req,res)=>{
     }
 });
 
-// // search
-// if(req.query.q&&!req.query.searchtype){
-//     res.status(200).json("please provide searchtype");
-// }
-// else if(!req.query.q&&req.query.searchtype){
-//     res.status(200).json("please provide searchkeywords");
-// }
-// else if(req.query.q&&req.query.searchtype){
-// queryfetch[req.query.searchtype]=req.query.q;
-// }
-// // search
+
 module.exports={productRouter};

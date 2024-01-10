@@ -6,7 +6,8 @@ const {userRouter}=require("./Routes/user.Routes");
 const {productRouter}=require("./Routes/product.Route.js");
 // const {auth}=require("./middlewares/auth.js");
 
- const {wishlistRouter}=require("./Routes/wishlist.Route");
+const {wishlistRouter}=require("./Routes/wishlist.Route");
+const {cartRouter}=require("./Routes/cart.Route");
 require("dotenv").config();
 
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use("/users",userRouter);
 app.use("/products",productRouter);
 app.use("/wishlist",wishlistRouter);
+app.use("/cart",cartRouter);
 app.get("/",(req,res)=>{
     res.send("hello");
 })
